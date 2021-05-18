@@ -1,0 +1,222 @@
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+     <!-- Main content -->
+     <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
+  
+                  <p>New Orders</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+  
+                  <p>Bounce Rate</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>44</h3>
+  
+                  <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>65</h3>
+  
+                  <p>Unique Visitors</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+      
+       <!-- Button Created -->
+       <div class="btnz-holder">
+        <button class="btnz btnz-2 hover-opacity">
+          <a href=""><span ng-click="addcat(); clearcats(); $parent.catedit=$parent.catdelete=false;">Add Category</span></a>
+        </button>
+    </div>
+
+       <!-- Content Header (Page header) -->
+  <div class="content-header" ng-show="tabShow">
+    <div class="container-fluid">
+      <div class="section-body mt-4">
+      <div class="tab-content">
+          <div class="tab-pane active" id="Dep-all">
+              <div class="table-responsive">
+                  <div class="table-responsive card">
+                      <table class="table table-hover table-striped table-vcenter text-nowrap mb-0">
+                          <thead>
+                              <tr>
+                                  <th>Id</th>
+                                  <th>Name</th>
+                                  <th>Description</th>
+                                  <th>Created date</th>
+                                  <th>Updated date</th>
+                                  <th>Created By</th>
+                                  <th>Updated By</th>
+                                  <th>Actions</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr ng-repeat = "x in categ"
+                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=$parent.tabShow=false;">
+                                  <td>{{x.categoryId}}</td>
+                                  <td>{{x.categoryName}}</td>
+                                  <td>{{x.description}}</td>
+                                  <td>{{x.createdDate}}</td>
+                                  <td>{{x.updatedDate}}</td>
+                                  <td>{{x.createdBy}}</td>
+                                  <td>{{x.updatedBy}}</td>
+                                  <td>
+                                      <!-- <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button> -->
+                                      <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit text-success"></i></button>
+                                      <button type="button" class="btn btn-icon btn-sm" title="Delete"><i class="fa fa-trash text-danger" ng-click="deletecats();"></i>
+                                      </button>
+                                      <!-- <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button> -->
+                                  </td>
+                              </tr>
+                        </tbody>
+
+                        <tfoot>  
+                          <tr>  
+                              <td align="center" colspan="6">  
+                                  <span class="form-group pull-left page-size form-inline">  
+                                      <select id="ddlPageSize" class="form-control control-color"  
+                                              ng-model="pageSize"  
+                                              ng-change="changePageSize()">
+                                          <option value="2">2</option>      
+                                          <option value="5">5</option>  
+                                          <option value="10">10</option>  
+                                          <option value="25">25</option>  
+                                          <option value="50">50</option>  
+                                      </select>  
+                                  </span>  
+                                  <div class="pull-right pagination">
+                                      <pagination total-items="totalItems" ng-model="pageIndex" items-per-page="pageSize" ng-change="pageChange()"></pagination>
+                                      <!-- <pagination total-items="totalItemsL" ng-change="pageChange()" items-per-page="pageSize" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPagesL"></pagination>
+                                      <a class="btn">Page: {{pageIndex}} / {{numPagesL}} {{totalItemsL}}</a> -->
+                                  </div>
+                              </td>  
+                          </tr>
+                      </tfoot> 
+                      </table>
+                  </div>        
+              </div>
+          </div>
+      </div>
+</div>
+</div>
+</div>
+
+</div>
+    <!-- /.content-wrapper -->
+
+
+<!---------------- Add Category part start ---------------->
+<div class="content-wrapper" ng-show="catpop">
+<form class="card-body was-validated pop-up" name="myform">
+  <div class="form-group row">
+      <div class="col-md-12">
+        <label class="col-form-label blu-colr">Categories</label>
+        <a href="" ng-click="closeCat(); loadCategory();"><i class="fa fa-times float-right"></i></a>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="col-md-3 col-form-label">Category Name</label>
+      <div class="col-md-7">
+          <input type="text" maxlength="30" class="form-control" ng-model="cats.categoryName" name="name" 
+          placeholder="max characters 30" required>
+          <div class="invalid-feedback">*required</div>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="col-md-3 col-form-label">Description</label>
+      <div class="col-md-7">
+        <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
+        ng-model="cats.description"  name="descript" required>
+          <div class="invalid-feedback">*required</div>
+      </div>
+  </div>
+  <div class="form-group row">
+      <label class="col-md-3 col-form-label"></label>
+      <div class="col-md-7">
+          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats();"
+          ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
+          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats();"
+          ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
+          <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
+          ng-click="deletecats()">Delete</button>
+      </div>
+  </div>
+</form>
+</div>
+<!--------------------------------------- end of category --------------------------------------------------->
+
+<ul class="pagination ng-isolate-scope ng-not-empty ng-valid" total-items="totalItems" ng-model="pageIndex" items-per-page="pageSize" ng-change="pageChange()">
+  <!-- ngIf: ::boundaryLinks -->
+  <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noPrevious()||ngDisabled}" class="pagination-prev ng-scope disabled"><a href="" ng-click="selectPage(page - 1, $event)" class="ng-binding">Previous</a></li><!-- end ngIf: ::directionLinks -->
+  <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope active"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index -->
+  <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noNext()||ngDisabled}" class="pagination-next ng-scope disabled"><a href="" ng-click="selectPage(page + 1, $event)" class="ng-binding">Next</a></li><!-- end ngIf: ::directionLinks -->
+  <!-- ngIf: ::boundaryLinks -->
+</ul>
+  

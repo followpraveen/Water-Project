@@ -1,0 +1,83 @@
+
+.content-wrap {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 250px;
+}
+
+/* Add Category button style */
+
+.btnz-holder {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  float: right;
+  max-width: 1000px;
+  /* margin: 35px auto 5px; */
+  margin: 20px -5px 20px;
+}
+.btnz {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0px 25px 15px;
+  min-width: 150px;
+}
+
+.btnz span {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  /* text-transform: uppercase; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 25px;
+  transition: 0.3s;
+}
+
+.btnz-2::before {
+  background-color: rgb(28, 31, 30);
+  transition: 0.3s ease-out;
+}
+.btnz-2 span {
+  color: rgb(28, 31, 30);
+  border: 1px solid rgb(28, 31, 30);
+  transition: 0.2s;
+ 
+}
+.btnz-2 span:hover {
+  color: rgb(255, 255, 255);
+  transition: 0.2s 0.1s;
+  background-color: #212529;
+  border-radius: 5px;
+}
+
+.btnz.hover-opacity::before {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+.btnz.hover-opacity:hover::before {
+  opacity: 1;
+}
+
+/* Added color to Categories */
+.blu-colr {
+  color: #007bff;
+}
+
+
+/* Pop up style */
+
+.pop-up {
+  margin-top: 120px;
+}
