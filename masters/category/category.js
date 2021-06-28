@@ -15,7 +15,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-myApp.controller('categoryCtrl', ['$scope', 'appService', function ($scope, appService) {
+myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope, categoryService) {
 
 
     ////////////////pagination////////////////////
@@ -31,7 +31,7 @@ myApp.controller('categoryCtrl', ['$scope', 'appService', function ($scope, appS
     $scope.categ = [];
     function getallCat() {
         $scope.categ = [];
-        appService.getallCat($scope.pageIndex, $scope.pageSize).then(function (response) {
+        categoryService.getallCat($scope.pageIndex, $scope.pageSize).then(function (response) {
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
                 $scope.categ.push({
@@ -102,7 +102,7 @@ myApp.controller('categoryCtrl', ['$scope', 'appService', function ($scope, appS
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                appService.deletecats($scope.cats).then(function () {
+                categoryService.deletecats($scope.cats).then(function () {
                     $scope.pageChange();
                     Swal.fire("Category Deleted Successfully!");
                 });
@@ -120,7 +120,7 @@ myApp.controller('categoryCtrl', ['$scope', 'appService', function ($scope, appS
         console.log($scope.cats);
     }
     $scope.addcats = function () {
-        appService.addcats($scope.cats).then(function (response) {
+        categoryService.addcats($scope.cats).then(function (response) {
             $scope.pageChange();
             if (response.data.responseCode == 201) {
                 Swal.fire({
@@ -130,8 +130,7 @@ myApp.controller('categoryCtrl', ['$scope', 'appService', function ($scope, appS
                     showConfirmButton: false,
                     timer: 1500
                 })
-            }
-            else {
+            } else {
                 swal.fire("Category Already Exist!")
             }
             $scope.loadCategory();
