@@ -1,6 +1,6 @@
 myApp.service('productService', ['$http', function ($http) {
 
-    const URL = "https://executivetracking.cloudjiffy.net/ExecutiveTrackingWeb/";
+    const URL = "https://executivetracking.cloudjiffy.net/WaterPlantWeb/";
 
     this.addProduct = function (pro) {
         if (pro.productId == 0 || pro.productId == null) {

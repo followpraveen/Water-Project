@@ -37,11 +37,10 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
                 $scope.prods.push({
-                    productId: value.productId, productName: value.productName, productCode: value.productCode,
-                    description: value.description, specification: value.specification, productBarcode: value.productBarcode,
-                    productType: value.productType, createdDate: value.insertedDate, updatedDate: value.updatedDate,
-                    createdBy: value.createdBy.userName,
-                    updatedBy: value.updatedBy.userName
+                    batchNo: value.batchNo, cgst: value.cgst, discount:value.discount, gst:value.gst,
+                    productBarcode: value.productBarcode, productMrp:value.productMrp, 
+                    productName: value.productName, sellingcost:value.sellingcost, sgst: value.sgst,
+                    specification: value.specification,
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
@@ -53,11 +52,15 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     $scope.pro = {
         productId: "",
         productName: "",
-        productCode: "",
-        description: "",
-        specification: "",
+        batchNo: "",
         productBarcode: "",
-        productType: "",
+        specification: "",
+        cgst:"",
+        sgst:"",
+        gst:"",
+        productMrp:"",
+        sellingcost:"",
+        discount:"",
         createdBy:
         {
             userId: usId
@@ -82,13 +85,17 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     ///////////////end of pagination///////////////////
 
     $scope.editProduct = function (x) {
-        $scope.pro.productId = x.productId;
+        $scope.pro.productId = x.productId;    
         $scope.pro.productName = x.productName;
-        $scope.pro.productCode = x.productCode;
-        $scope.pro.description = x.description;
-        $scope.pro.specification = x.specification;
+        $scope.pro.batchNo = x.batchNo;
         $scope.pro.productBarcode = x.productBarcode;
-        $scope.pro.productType = x.productType;
+        $scope.pro.specification = x.specification;
+        // $scope.pro.cgst = x.cgst;
+        // $scope.pro.sgst = x.sgst;
+        // $scope.pro.gst = x.gst;
+        $scope.pro.productMrp = x.productMrp;
+        $scope.pro.sellingcost = x.sellingcost;
+        $scope.pro.discount = x.discount;
         console.log($scope.pro);
     }
     $scope.deleteProduct = function () {
@@ -108,17 +115,19 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                 $scope.loadProduct();
             }
         });
-
-
     }
     $scope.clearProduct = function () {
         $scope.pro.productId = "",
         $scope.pro.productName = "";
-        $scope.pro.productCode = "";
-        $scope.pro.description = "";
-        $scope.pro.specification = "";
+        $scope.pro.batchNo = "";
         $scope.pro.productBarcode = "";
-        $scope.pro.productType = "";
+        $scope.pro.specification = "";
+        // $scope.pro.cgst = "";
+        // $scope.pro.sgst = "";
+        // $scope.pro.gst = "";
+        $scope.pro.productMrp = "";
+        $scope.pro.sellingcost = "";
+        $scope.pro.discount = "";
         console.log($scope.pro);
     }
     $scope.addProduct = function () {
