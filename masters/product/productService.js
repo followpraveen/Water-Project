@@ -2,19 +2,19 @@ myApp.service('productService', ['$http', function ($http) {
 
     const URL = "https://executivetracking.cloudjiffy.net/WaterPlantWeb/";
 
-    this.addProduct = function (pro) {
-        if (pro.productId == 0 || pro.productId == null) {
+    this.addProduct = function (prod) {
+        if (prod.productId == 0 || prod.productId == null) {
             return $http({
                 method: "POST",
                 url: URL + "product/v1/createProduct",
-                data: JSON.stringify(pro)
+                data: JSON.stringify(prod)
             })
         }
         else {
             return $http({
                 method: "PUT",
                 url: URL + "product/v1/updateProduct",
-                data: JSON.stringify(pro)
+                data: JSON.stringify(prod)
             })
         }
     }
@@ -26,10 +26,10 @@ myApp.service('productService', ['$http', function ($http) {
         });
     }
 
-    this.deleteProduct = function (pro) {
+    this.deleteProduct = function (prod) {
         return $http({
             method: "DELETE",
-            url: URL + "product/v1/deleteProductByProductId/" + pro.productId
+            url: URL + "product/v1/deleteProductById/" + prod.productId
         })
     }
 }]);

@@ -1,25 +1,24 @@
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-
+  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Dashboard</h1>
-        </div>
-        <!-- /.col -->
+        </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Master</a></li>
+            <li class="breadcrumb-item"><a href="#">Masters</a></li>
             <li class="breadcrumb-item active">Product</li>
           </ol>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
   </div>
+  <!-- /.content-header -->
 
+  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
@@ -35,7 +34,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="# " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -50,7 +49,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="# " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -65,7 +64,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="# " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -80,25 +79,26 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="# " class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
       </div>
-    </div>
-    <!-- /.container-fluid -->
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
   </section>
+  <!-- /.content -->
 
   <!-- Button Created -->
   <div class="btnz-holder">
     <button class="btnz btnz-2 hover-opacity">
-      <a href=""><span ng-click="addDuct(); clearProduct(); $parent.proedit=$parent.prodelete=false;">Add
-          Product</span></a>
+      <a href=""><span ng-click="addpro(); clearProds(); 
+        $parent.proedit=$parent.prodelete=false;">Add Product</span></a>
     </button>
   </div>
 
   <!-- Content Header (Page header) -->
-  <div class="content-header" ng-show="proShow">
+  <div class="content-header" ng-show="tabShow">
     <div class="container-fluid">
       <div class="section-body mt-4">
         <div class="tab-content">
@@ -110,15 +110,15 @@
                     <tr>
                       <th>Id</th>
                       <th>Name</th>
-                      <th>Batch No</th>
-                      <th>Specification</th>
                       <th>Barcode</th>
+                      <th>Batch No</th>
                       <th>MRP</th>
                       <th>Selling Cost</th>
                       <th>Discount</th>
                       <th>GST</th>
                       <th>CGST</th>
                       <th>SGST</th>
+                      <th>Specification</th>
                       <th>Created date</th>
                       <th>Updated date</th>
                       <th>Created By</th>
@@ -127,13 +127,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="x in prods"
-                      ng-click="editProduct(x); $parent.propop=true;$parent.proedit=$parent.prodelete=true;$parent.addprobtn=$parent.proShow=false;">
-
+                    <tr ng-repeat="x in masPro"
+                      ng-click="editProds(x); $parent.propop=true;
+                      $parent.proedit=$parent.prodelete=true;
+                      $parent.addprobtn=$parent.tabShow=false;">
                       <td>{{x.productId}}</td>
-                      <td>{{x.productName}}</td>
-                      <td>{{x.batchNo}}</td>
+                      <td>{{x.peoductName}}</td>
                       <td>{{x.productBarcode}}</td>
+                      <td>{{x.batchNo}}</td>
                       <td>{{x.productMrp}}</td>
                       <td>{{x.sellingcost}}</td>
                       <td>{{x.discount}}</td>
@@ -150,7 +151,7 @@
                         <button type="button" class="btn btn-icon btn-sm" title="Edit"><i
                             class="fa fa-edit text-success"></i></button>
                         <button type="button" class="btn btn-icon btn-sm" title="Delete"><i
-                            class="fa fa-trash text-danger"></i>
+                            class="fa fa-trash text-danger" ng-click="deleteProds();"></i>
                         </button>
                         <!-- <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button> -->
                       </td>
@@ -187,110 +188,93 @@
       </div>
     </div>
   </div>
+
 </div>
+<!-- /.content-wrapper -->
+
 
 <!---------------- Add Category part start ---------------->
 <div class="content-wrapper" ng-show="propop">
-  <form class="card-body was-validated" name="myform">
-    <div class="form-group row pop-up">
+  <form class="card-body was-validated pop-up" name="myform">
+    <div class="form-group row">
       <div class="col-md-12">
         <label class="col-form-label blu-colr">Products</label>
-        <a href="" ng-click="closeDuct(); loadProduct();"><i class="fa fa-times float-right"></i></a>
+        <a href="" ng-click="closeProd(); loadProucts();"><i class="fa fa-times float-right"></i></a>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 col-form-label">Product Name</label>
       <div class="col-md-7">
-        <input type="text" maxlength="30" class="form-control" ng-model="pro.productName" name="name"
+        <input type="text" maxlength="30" class="form-control" ng-model="prod.productName" name="name"
           placeholder="max characters 30" required>
+        <div class="invalid-feedback">*required</div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label">Product Barcode</label>
+      <div class="col-md-7">
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.productBarcode" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 col-form-label">Batch No</label>
       <div class="col-md-7">
-        <input type="text" maxlength="30" class="form-control" ng-model="pro.batchNo" name="batch number"
-          placeholder="max characters 30" required>
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.batchNo" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
-
     <div class="form-group row">
-      <label class="col-md-3 col-form-label">Product Barcode</label>
+      <label class="col-md-3 col-form-label">MRP</label>
       <div class="col-md-7">
-        <input type="text" maxlength="30" class="form-control" ng-model="pro.productBarcode" name="product barcode"
-          placeholder="max characters 30" required>
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.productMrp" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
-
     <div class="form-group row">
-      <label class="col-md-3 col-form-label">Product MRP</label>
-      <div class="col-md-7">
-        <input type="number" class="form-control" ng-model="pro.productMrp" name="product mrp"
-          placeholder="max characters 30" required>
-        <div class="invalid-feedback">*required</div>
-      </div>
-    </div>
-    <!-- <div class="form-group row">
       <label class="col-md-3 col-form-label">Selling Cost</label>
       <div class="col-md-7">
-        <input type="number" maxlength="30" class="form-control" ng-model="pro.sellingcost" name="selling cost"
-          placeholder="max characters 30" required>
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.sellingcost" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
-    </div> -->
-    <!-- <div class="form-group row">
+    </div>
+    <div class="form-group row">
       <label class="col-md-3 col-form-label">Discount</label>
       <div class="col-md-7">
-        <input type="number" maxlength="30" class="form-control" ng-model="pro.discount" name="discount"
-          placeholder="max characters 30" required>
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.discount" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
-    </div> -->
-    <!-- <div class="form-group row">
+    </div>
+    <div class="form-group row">
       <label class="col-md-3 col-form-label">GST</label>
       <div class="col-md-7">
-        <input type="number" maxlength="30" class="form-control" ng-model="pro.gst" name="gst"
-          placeholder="max characters 30" required>
+        <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
+          ng-model="prod.gst" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-3 col-form-label">CGST</label>
-      <div class="col-md-7">
-        <input type="number" maxlength="30" class="form-control" ng-model="pro.cgst" name="cst"
-          placeholder="max characters 30" required>
-        <div class="invalid-feedback">*required</div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-3 col-form-label">SGST</label>
-      <div class="col-md-7">
-        <input type="number" maxlength="30" class="form-control" ng-model="pro.sgst" name="sgst"
-          placeholder="max characters 30" required>
-        <div class="invalid-feedback">*required</div>
-      </div>
-    </div> -->
-
-    <!-- <div class="form-group row">
       <label class="col-md-3 col-form-label">Specification</label>
       <div class="col-md-7">
-        <input type="text" maxlength="30" class="form-control" ng-model="pro.specification" name="specification"
-          placeholder="max characters 30" required>
+        <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
+          ng-model="prod.specification" name="descript" required>
         <div class="invalid-feedback">*required</div>
       </div>
-    </div> -->
-
+    </div>
     <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-        <button type="submit" class="btn btn-outline-primary" ng-show="addprobtn" ng-click="addProduct();"
+        <button type="submit" class="btn btn-outline-primary" ng-show="addducbtn" ng-click="addProds(); loadProucts();"
           ng-disabled=!myform.name.$valid||!myform.descript.$valid>Add</button>
-        <button type="submit" class="btn btn-outline-primary" ng-show="proedit" ng-click="addProduct();"
+        <button type="submit" class="btn btn-outline-primary" ng-show="ducedit" ng-click="addProds(); loadProucts();"
           ng-disabled=!myform.name.$valid||!myform.descript.$valid>Update</button>
-        <button type="submit" class="btn btn-outline-danger" ng-show="prodelete"
-          ng-click="deleteProduct(); loadProduct();">Delete</button>
+        <button type="submit" class="btn btn-outline-danger" ng-show="ducdelete" 
+        ng-click="deleteProds() loadProucts();">Delete</button>
       </div>
     </div>
   </form>

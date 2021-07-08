@@ -15,7 +15,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
     });
 }]);
 
-
 myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, productService) {
 
 
@@ -23,24 +22,24 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 1;
-    $scope.maxSize = 6;
-    $scope.totalItems = 0;
+    $scope.pageIndex = 0;
+    $scope.maxSize = "";
+    $scope.totalItems = "";
     $scope.numPages = "";
     // $scope.pagesizeSelected="";
-
-    $scope.prods = [];
-    getallProduct();
-    function getallProduct() {
-        $scope.prods = [];
-        productService.getallProduct($scope.pageIndex, $scope.pageSize).then(function (response) {
+    getallProds();
+    $scope.masPro = [];
+    function getallProds() {
+        $scope.masPro = [];
+        productService.getallProds($scope.pageIndex, $scope.pageSize).then(function (response) {
             console.log(response.data.content);
             angular.forEach(response.data.content, function (value) {
-                $scope.prods.push({
-                    batchNo: value.batchNo, cgst: value.cgst, discount:value.discount, gst:value.gst,
-                    productBarcode: value.productBarcode, productMrp:value.productMrp, 
-                    productName: value.productName, sellingcost:value.sellingcost, sgst: value.sgst,
-                    specification: value.specification,
+                $scope.masPro.push({
+                    productId: value.productId, productName: value.productName, productBarcode:value.productBarcode,
+                    batchNo:value.batchNo, productMrp:value.productMrp, sellingcost:value.sellingcost,
+                    discount:value.discount, gst:value.gst, specification: value.specification,
+                    createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
+                    updatedBy: value.updatedBy.userName
                 });
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
@@ -49,18 +48,15 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
     }
 
 
-    $scope.pro = {
-        productId: "",
+    $scope.prod = {
         productName: "",
-        batchNo: "",
         productBarcode: "",
-        specification: "",
-        cgst:"",
-        sgst:"",
-        gst:"",
+        batchNo:"",
         productMrp:"",
         sellingcost:"",
         discount:"",
+        gst:"",
+        speciication: "",
         createdBy:
         {
             userId: usId
@@ -72,33 +68,31 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     $scope.changePageSize = function () {
         $scope.pageIndex = 0;
-        getallProduct();
+        getallProds();
     }
 
     $scope.pageChange = function () {
         $scope.pageIndex = $scope.pageIndex - 1;
-        getallProduct($scope.pageIndex, $scope.pageSize);
+        getallProds($scope.pageIndex, $scope.pageSize);
         $scope.pageIndex = $scope.pageIndex + 1;
     }
 
 
-    ///////////////end of pagination///////////////////
+    /////////////end of pagination///////////////////
 
-    $scope.editProduct = function (x) {
-        $scope.pro.productId = x.productId;    
-        $scope.pro.productName = x.productName;
-        $scope.pro.batchNo = x.batchNo;
-        $scope.pro.productBarcode = x.productBarcode;
-        $scope.pro.specification = x.specification;
-        // $scope.pro.cgst = x.cgst;
-        // $scope.pro.sgst = x.sgst;
-        // $scope.pro.gst = x.gst;
-        $scope.pro.productMrp = x.productMrp;
-        $scope.pro.sellingcost = x.sellingcost;
-        $scope.pro.discount = x.discount;
-        console.log($scope.pro);
+    $scope.editProds = function (x) {
+        $scope.prod.productId = x.productId;
+        $scope.prod.productName = x.productName;
+        $scope.prod.productBarcode = x.productBarcode;
+        $scope.prod.batchNo = x.batchNo;
+        $scope.prod.productMrp = x.productMrp;
+        $scope.prod.sellingcost = x.sellingcost;
+        $scope.prod.discount = x.discount;
+        $scope.prods.gst = x.gst;
+        $scope.prod.specification = x.specification;
+        console.log($scope.prod);
     }
-    $scope.deleteProduct = function () {
+    $scope.deleteProds = function () {
         Swal.fire({
             title: "Are you sure?",
             icon: "warning",
@@ -108,30 +102,30 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                productService.deleteProduct($scope.pro).then(function () {
+                productService.deleteProds($scope.prod).then(function () {
                     $scope.pageChange();
-                    Swal.fire("Product Deleted Successfully");
+                    Swal.fire("Product Deleted Successfully!");
                 });
-                $scope.loadProduct();
+                $scope.loadProucts();
             }
         });
+
+
     }
-    $scope.clearProduct = function () {
-        $scope.pro.productId = "",
-        $scope.pro.productName = "";
-        $scope.pro.batchNo = "";
-        $scope.pro.productBarcode = "";
-        $scope.pro.specification = "";
-        // $scope.pro.cgst = "";
-        // $scope.pro.sgst = "";
-        // $scope.pro.gst = "";
-        $scope.pro.productMrp = "";
-        $scope.pro.sellingcost = "";
-        $scope.pro.discount = "";
-        console.log($scope.pro);
+    $scope.clearProds = function () {
+        $scope.prod.productId = " ";
+        $scope.prod.productName = " ";
+        $scope.prod.productBarcode = " ";
+        $scope.prod.batchNo = " ";
+        $scope.prod.productMrp = " ";
+        $scope.prod.sellingcost = " ";
+        $scope.prod.discount = " ";
+        $scope.prod.gst = " ";
+        $scope.prod.specification = " ";
+        console.log($scope.prod);
     }
-    $scope.addProduct = function () {
-        productService.addProduct($scope.pro).then(function (response) {
+    $scope.addProds = function () {
+        productService.addProds($scope.prod).then(function (response) {
             $scope.pageChange();
             if (response.data.responseCode == 201) {
                 Swal.fire({
@@ -141,27 +135,24 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                     showConfirmButton: false,
                     timer: 1500
                 })
-            }  else {
-                swal.fire("Product Already Exist");
+            } else {
+                swal.fire("Product Already Exist!")
             }
-            $scope.loadProduct();
+            $scope.loadProucts();
         });
 
     }
+    $scope.tabShow = true;
 
-
-    $scope.proShow = true;
-
-    $scope.closeDuct = function () {
+    $scope.closeProd = function () {
         $scope.propop = false;
     }
 
-    $scope.addDuct = function () {
-        $scope.propop = $scope.addprobtn = true; $scope.proedit = $scope.proShow = $scope.prodelete = false;
+    $scope.addpro = function () {
+        $scope.propop = $scope.addprobtn = true; $scope.proedit = $scope.tabShow = $scope.prodelete = false;
     }
 
-    $scope.loadProduct = function () {
-        $scope.proShow = true; $scope.propop = false;
+    $scope.loadCategory = function () {
+        $scope.tabShow = true; $scope.propop = false;
     }
-
 }]);

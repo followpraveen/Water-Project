@@ -100,7 +100,7 @@ myApp.controller('rawMaterialCtrl', ['$scope', 'rawMaterialService', function ($
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                rawMaterialService.deletecats($scope.mats).then(function () {
+                rawMaterialService.deleteMats($scope.mats).then(function () {
                     $scope.pageChange();
                     Swal.fire("Raw Material Deleted Successfully!");
                 });

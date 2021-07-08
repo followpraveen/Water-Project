@@ -10,7 +10,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Masters</a></li>
-              <li class="breadcrumb-item active">Raw Material</li>
+              <li class="breadcrumb-item active">Material Supplier</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -92,12 +92,14 @@
        <!-- Button Created -->
        <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="matAdd(); clearMats(); $parent.matedit=$parent.matdelete=false;">Add Raw Material</span></a>
+          <a href=""><span ng-click="addSup(); clearSupply(); 
+            $parent.supedit=$parent.supdelete=false;">
+            Add Supplier</span></a>
         </button>
     </div>
 
        <!-- Content Header (Page header) -->
-  <div class="content-header" ng-show="tabMatShow">
+  <div class="content-header" ng-show="tabShow">
     <div class="container-fluid">
       <div class="section-body mt-4">
       <div class="tab-content">
@@ -109,13 +111,12 @@
                               <tr>
                                   <th>Id</th>
                                   <th>Name</th>
-                                  <th>Barcode</th>
-                                  <th>Cost</th>
-                                  <th>Discount</th>
-                                  <th>GST</th>
-                                  <th>CGST</th>
-                                  <th>SGST</th>
-                                  <th>Speciication</th>
+                                  <th>Mobile No</th>
+                                  <th>Adress</th>
+                                  <th>Bank AC No</th>
+                                  <th>IFS Code</th>
+                                  <th>GST No</th>
+                                  <th>Description</th>
                                   <th>Created date</th>
                                   <th>Updated date</th>
                                   <th>Created By</th>
@@ -124,17 +125,18 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr ng-repeat = "x in raw"
-                              ng-click="editMats(x); $parent.matpop=true;$parent.matedit=$parent.matdelete=true;$parent.addmatbtn=$parent.tabMatShow=false;">
-                                  <td>{{x.rawmaterialId}}</td>
-                                  <td>{{x.rawMaterialName}}</td>
-                                  <td>{{x.barcode}}</td>
-                                  <td>{{x.rawMaterialCost}}</td>
-                                  <td>{{x.discount}}</td>
-                                  <td>{{x.gst}}</td>
-                                  <td>{{x.cgst}}</td>
-                                  <td>{{x.sgst}}</td>
-                                  <td>{{x.specification}}</td>
+                              <tr ng-repeat = "x in supMat"
+                              ng-click="editSupply(x); $parent.suppop=true;
+                              $parent.supedit=$parent.supdelete=true;
+                              $parent.addsupbtn=$parent.tabShow=false;">
+                                  <td>{{x.supplierId}}</td>
+                                  <td>{{x.supplierName}}</td>
+                                  <td>{{x.mobileNumber}}</td>
+                                  <td>{{x.address}}</td>
+                                  <td>{{x.bankAcNo}}</td>
+                                  <td>{{x.ifsc}}</td>
+                                  <td>{{x.gstNo}}</td>
+                                  <td>{{x.description}}</td>
                                   <td>{{x.createdDate}}</td>
                                   <td>{{x.updatedDate}}</td>
                                   <td>{{x.createdBy}}</td>
@@ -142,7 +144,7 @@
                                   <td>
                                       <!-- <button type="button" class="btn btn-icon btn-sm" title="View"><i class="fa fa-eye"></i></button> -->
                                       <button type="button" class="btn btn-icon btn-sm" title="Edit"><i class="fa fa-edit text-success"></i></button>
-                                      <button type="button" class="btn btn-icon btn-sm" title="Delete"><i class="fa fa-trash text-danger" ng-click="deleteMats();"></i>
+                                      <button type="button" class="btn btn-icon btn-sm" title="Delete"><i class="fa fa-trash text-danger" ng-click="deleteSupply();"></i>
                                       </button>
                                       <!-- <button type="button" class="btn btn-icon btn-sm js-sweetalert" title="Delete" data-type="confirm"><i class="fa fa-trash-o text-danger"></i></button> -->
                                   </td>
@@ -185,71 +187,79 @@
 
 
 <!---------------- Add Category part start ---------------->
-<div class="content-wrapper" ng-show="matpop">
+<div class="content-wrapper" ng-show="catpop">
 <form class="card-body was-validated pop-up" name="myform">
   <div class="form-group row">
       <div class="col-md-12">
-        <label class="col-form-label blu-colr">Products</label>
-        <a href="" ng-click="closeMat(); loadMaterial();"><i class="fa fa-times float-right"></i></a>
+        <label class="col-form-label blu-colr">Supplier</label>
+        <a href="" ng-click="closeSup(); loadSupplier();"><i class="fa fa-times float-right"></i></a>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label">Raw Material Name</label>
+      <label class="col-md-3 col-form-label">Supplier Name</label>
       <div class="col-md-7">
-          <input type="text" maxlength="30" class="form-control" ng-model="mats.rawMaterialName" name="name" 
+          <input type="text" maxlength="30" class="form-control" ng-model="matSup.supplierName" name="name" 
           placeholder="max characters 30" required>
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
-      <label class="col-md-3 col-form-label">Barcode</label>
+    <label class="col-md-3 col-form-label">Mobile Numer</label>
+    <div class="col-md-7">
+        <input type="text" maxlength="30" class="form-control" ng-model="matSup.mobileNumber" name="name" 
+        placeholder="max characters 30" required>
+        <div class="invalid-feedback">*required</div>
+    </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">Address</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="matSup.address" name="name" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">Bank Ac No</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="matSup.bankAcNo" name="name" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">IFS Code</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="matSup.ifsc" name="name" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+<div class="form-group row">
+  <label class="col-md-3 col-form-label">GST No</label>
+  <div class="col-md-7">
+      <input type="text" maxlength="30" class="form-control" ng-model="matSup.gstNo" name="name" 
+      placeholder="max characters 30" required>
+      <div class="invalid-feedback">*required</div>
+  </div>
+</div>
+  <div class="form-group row">
+      <label class="col-md-3 col-form-label">Description</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-        ng-model="mats.barcode"  name="descript" required>
+        ng-model="matSup.description"  name="descript" required>
           <div class="invalid-feedback">*required</div>
       </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-3 col-form-label">Raw Material Cost</label>
-    <div class="col-md-7">
-      <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-      ng-model="mats.rawMaterialCost"  name="descript" required>
-        <div class="invalid-feedback">*required</div>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-3 col-form-label">Discount</label>
-    <div class="col-md-7">
-      <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-      ng-model="mats.discount"  name="descript" required>
-        <div class="invalid-feedback">*required</div>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-3 col-form-label">GST</label>
-    <div class="col-md-7">
-      <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-      ng-model="mats.gst"  name="descript" required>
-        <div class="invalid-feedback">*required</div>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-3 col-form-label">Speciication</label>
-    <div class="col-md-7">
-      <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-      ng-model="mats.specification"  name="descript" required>
-        <div class="invalid-feedback">*required</div>
-    </div>
-</div>
-  <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addmatbtn" ng-click="addMats(); pageChange();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addsupbtn" ng-click="addSupply();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="matedit" ng-click="addMats(); pageChange();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="supedit" ng-click="addSupply();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
-          <button type="submit" class="btn btn-outline-danger" ng-show="matdelete"
-          ng-click="deleteMats(); pageChange();">Delete</button>
+          <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
+          ng-click="deleteSupply();">Delete</button>
       </div>
   </div>
 </form>

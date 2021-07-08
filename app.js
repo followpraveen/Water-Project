@@ -6,6 +6,7 @@ angular.module('myApp', [
     'myApp.category',
     'myApp.product',
     'myApp.rawmaterial',
+    'myApp.materialsupplier',
 ])
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
         $locationProvider.hashPrefix('!');

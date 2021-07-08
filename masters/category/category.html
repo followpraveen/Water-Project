@@ -92,7 +92,9 @@
        <!-- Button Created -->
        <div class="btnz-holder">
         <button class="btnz btnz-2 hover-opacity">
-          <a href=""><span ng-click="addcat(); clearcats(); $parent.catedit=$parent.catdelete=false;">Add Category</span></a>
+          <a href=""><span ng-click="addcat(); clearcats(); 
+            $parent.catedit=$parent.catdelete=false;">
+            Add Category</span></a>
         </button>
     </div>
 
@@ -119,7 +121,9 @@
                           </thead>
                           <tbody>
                               <tr ng-repeat = "x in categ"
-                              ng-click="editcats(x); $parent.catpop=true;$parent.catedit=$parent.catdelete=true;$parent.addcatbtn=$parent.tabShow=false;">
+                              ng-click="editcats(x); $parent.catpop=true;
+                              $parent.catedit=$parent.catdelete=true;
+                              $parent.addcatbtn=$parent.tabShow=false;">
                                   <td>{{x.categoryId}}</td>
                                   <td>{{x.categoryName}}</td>
                                   <td>{{x.description}}</td>

@@ -29,7 +29,7 @@ myApp.service('rawMaterialService', ['$http', function ($http) {
     this.deleteMats = function (mats) {
         return $http({
             method: "DELETE",
-            url: URL + "rawmaterial/v1/deleteRawMaterialByRawMaterialId/" + mats.rawmaterialId
+            url: URL + "rawmaterial/v1/deleteRawMaterialById/" + mats.rawmaterialId
         })
-    }
+    }                           
 }]);
