@@ -22,7 +22,7 @@ myApp.controller('categoryCtrl', ['$scope', 'categoryService', function ($scope,
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = "";
     $scope.totalItems = "";
     $scope.numPages = "";

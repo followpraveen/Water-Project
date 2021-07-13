@@ -22,14 +22,15 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = "";
     $scope.totalItems = "";
     $scope.numPages = "";
     // $scope.pagesizeSelected="";
     getallProds();
     $scope.masPro = [];
-    function getallProds() {
+   function getallProds() {
+        
         $scope.masPro = [];
         productService.getallProds($scope.pageIndex, $scope.pageSize).then(function (response) {
             console.log(response.data.content);
@@ -49,8 +50,9 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.prod = {
-        productName: "",
-        productBarcode: "",
+        productId:"",
+        productName:"",
+        productBarcode:"",
         batchNo:"",
         productMrp:"",
         sellingcost:"",
@@ -88,7 +90,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
         $scope.prod.productMrp = x.productMrp;
         $scope.prod.sellingcost = x.sellingcost;
         $scope.prod.discount = x.discount;
-        $scope.prods.gst = x.gst;
+        $scope.prod.gst = x.gst;
         $scope.prod.specification = x.specification;
         console.log($scope.prod);
     }
@@ -113,15 +115,15 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
     }
     $scope.clearProds = function () {
-        $scope.prod.productId = " ";
-        $scope.prod.productName = " ";
-        $scope.prod.productBarcode = " ";
-        $scope.prod.batchNo = " ";
-        $scope.prod.productMrp = " ";
-        $scope.prod.sellingcost = " ";
-        $scope.prod.discount = " ";
-        $scope.prod.gst = " ";
-        $scope.prod.specification = " ";
+        $scope.prod.productId = "";
+        $scope.prod.productName = "";
+        $scope.prod.productBarcode = "";
+        $scope.prod.batchNo = "";
+        $scope.prod.productMrp = "";
+        $scope.prod.sellingcost = "";
+        $scope.prod.discount = "";
+        $scope.prod.gst = "";
+        $scope.prod.specification = "";
         console.log($scope.prod);
     }
     $scope.addProds = function () {
@@ -142,17 +144,19 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
         });
 
     }
-    $scope.tabShow = true;
+    
+    $scope.tabproduct = true;
 
     $scope.closeProd = function () {
-        $scope.propop = false;
+        $scope.popproduc = false;
     }
 
-    $scope.addpro = function () {
-        $scope.propop = $scope.addprobtn = true; $scope.proedit = $scope.tabShow = $scope.prodelete = false;
+    $scope.addprod = function () {
+        $scope.popproduc = $scope.addbtnproduc = true; $scope.editproduc = $scope.tabproduct = $scope.deleteproduc = false;
     }
 
-    $scope.loadCategory = function () {
-        $scope.tabShow = true; $scope.propop = false;
+    $scope.loadProucts = function () {
+        $scope.tabproduct = true; $scope.popproduc = false;
     }
+
 }]);

@@ -204,12 +204,12 @@
   <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="addcatbtn" ng-click="addcats(); loadCategory();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
-          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats();"
+          <button type="submit" class="btn btn-outline-primary" ng-show="catedit" ng-click="addcats(); loadCategory();"
           ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="catdelete"
-          ng-click="deletecats()">Delete</button>
+          ng-click="deletecats(); loadCategory();">Delete</button>
       </div>
   </div>
 </form>

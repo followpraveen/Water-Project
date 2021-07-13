@@ -92,13 +92,13 @@
   <!-- Button Created -->
   <div class="btnz-holder">
     <button class="btnz btnz-2 hover-opacity">
-      <a href=""><span ng-click="addpro(); clearProds(); 
-        $parent.proedit=$parent.prodelete=false;">Add Product</span></a>
+      <a href=""><span ng-click="addprod(); clearProds(); 
+        $parent.editproduc=$parent.deleteproduc=false;">Add Product</span></a>
     </button>
   </div>
 
   <!-- Content Header (Page header) -->
-  <div class="content-header" ng-show="tabShow">
+  <div class="content-header" ng-show="tabproduct">
     <div class="container-fluid">
       <div class="section-body mt-4">
         <div class="tab-content">
@@ -128,9 +128,9 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="x in masPro"
-                      ng-click="editProds(x); $parent.propop=true;
-                      $parent.proedit=$parent.prodelete=true;
-                      $parent.addprobtn=$parent.tabShow=false;">
+                      ng-click="editProds(x); $parent.popproduc=true;
+                      $parent.editproduc=$parent.deleteproduc=true;
+                      $parent.addbtnproduc=$parent.tabproduct=false;">
                       <td>{{x.productId}}</td>
                       <td>{{x.peoductName}}</td>
                       <td>{{x.productBarcode}}</td>
@@ -194,7 +194,7 @@
 
 
 <!---------------- Add Category part start ---------------->
-<div class="content-wrapper" ng-show="propop">
+<div class="content-wrapper" ng-show="popproduc">
   <form class="card-body was-validated pop-up" name="myform">
     <div class="form-group row">
       <div class="col-md-12">
@@ -214,7 +214,7 @@
       <label class="col-md-3 col-form-label">Product Barcode</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.productBarcode" name="descript" required>
+          ng-model="prod.productBarcode" name="product barcode" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -222,7 +222,7 @@
       <label class="col-md-3 col-form-label">Batch No</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.batchNo" name="descript" required>
+          ng-model="prod.batchNo" name="batch no" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -230,7 +230,7 @@
       <label class="col-md-3 col-form-label">MRP</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.productMrp" name="descript" required>
+          ng-model="prod.productMrp" name="mrp" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -238,7 +238,7 @@
       <label class="col-md-3 col-form-label">Selling Cost</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.sellingcost" name="descript" required>
+          ng-model="prod.sellingcost" name="selling cost" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -246,7 +246,7 @@
       <label class="col-md-3 col-form-label">Discount</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.discount" name="descript" required>
+          ng-model="prod.discount" name="discount" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -254,7 +254,7 @@
       <label class="col-md-3 col-form-label">GST</label>
       <div class="col-md-7">
         <input maxlength="30" class="form-control no-resize" placeholder="max characters 30"
-          ng-model="prod.gst" name="descript" required>
+          ng-model="prod.gst" name="gst" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
@@ -262,19 +262,19 @@
       <label class="col-md-3 col-form-label">Specification</label>
       <div class="col-md-7">
         <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-          ng-model="prod.specification" name="descript" required>
+          ng-model="prod.specification" name="specific" required>
         <div class="invalid-feedback">*required</div>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
-        <button type="submit" class="btn btn-outline-primary" ng-show="addducbtn" ng-click="addProds(); loadProucts();"
-          ng-disabled=!myform.name.$valid||!myform.descript.$valid>Add</button>
-        <button type="submit" class="btn btn-outline-primary" ng-show="ducedit" ng-click="addProds(); loadProucts();"
-          ng-disabled=!myform.name.$valid||!myform.descript.$valid>Update</button>
-        <button type="submit" class="btn btn-outline-danger" ng-show="ducdelete" 
-        ng-click="deleteProds() loadProucts();">Delete</button>
+        <button type="submit" class="btn btn-outline-primary" ng-show="addbtnproduc" ng-click="addProds();"
+          ng-disabled=!myform.name.$valid||!myform.specific.$valid>Add</button>
+        <button type="submit" class="btn btn-outline-primary" ng-show="editproduc" ng-click="addProds();"
+          ng-disabled=!myform.name.$valid||!myform.specific.$valid>Update</button>
+        <button type="submit" class="btn btn-outline-danger" ng-show="deleteproduc" 
+        ng-click="deleteProds(); loadProucts();">Delete</button>
       </div>
     </div>
   </form>

@@ -237,7 +237,7 @@
     <label class="col-md-3 col-form-label">Speciication</label>
     <div class="col-md-7">
       <input maxlength="250" class="form-control no-resize" placeholder="max characters 250"
-      ng-model="mats.specification"  name="descript" required>
+      ng-model="mats.specification"  name="specific" required>
         <div class="invalid-feedback">*required</div>
     </div>
 </div>
@@ -245,11 +245,11 @@
       <label class="col-md-3 col-form-label"></label>
       <div class="col-md-7">
           <button type="submit" class="btn btn-outline-primary" ng-show="addmatbtn" ng-click="addMats(); pageChange();"
-          ng-disabled= !myform.name.$valid||!myform.descript.$valid>Add</button>
+          ng-disabled= !myform.name.$valid||!myform.specific.$valid>Add</button>
           <button type="submit" class="btn btn-outline-primary" ng-show="matedit" ng-click="addMats(); pageChange();"
-          ng-disabled= !myform.name.$valid||!myform.descript.$valid>Update</button>
+          ng-disabled= !myform.name.$valid||!myform.specific.$valid>Update</button>
           <button type="submit" class="btn btn-outline-danger" ng-show="matdelete"
-          ng-click="deleteMats(); pageChange();">Delete</button>
+          ng-click="deleteMats(); loadMaterial();">Delete</button>
       </div>
   </div>
 </form>

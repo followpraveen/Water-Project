@@ -22,7 +22,7 @@ myApp.controller('rawMaterialCtrl', ['$scope', 'rawMaterialService', function ($
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 0;
+    $scope.pageIndex = 1;
     $scope.maxSize = "";
     $scope.totalItems = "";
     $scope.numPages = "";
@@ -88,7 +88,7 @@ myApp.controller('rawMaterialCtrl', ['$scope', 'rawMaterialService', function ($
         $scope.mats.discount = x.discount;
         $scope.mats.gst = x.gst;
         $scope.mats.specification = x.specification;
-        console.log($scope.cats);
+        console.log($scope.mats);
     }
     $scope.deleteMats = function () {
         Swal.fire({

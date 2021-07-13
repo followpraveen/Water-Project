@@ -2,35 +2,35 @@ myApp.service('supplierService', ['$http', function ($http) {
 
     const URL = "https://executivetracking.cloudjiffy.net/WaterPlantWeb/";
 
-    this.addcats = function (matSup) {
-        if (matSup.supplierId == 0 || matSup.supplierId == null) {
+    this.addSupplier = function (sup) {
+        if (sup.supplierId == 0 || sup.supplierId == null) {
             return $http({
                 method: "POST",
-                url: URL + "category/v1/createMaterialSupplier",
-                data: JSON.stringify(matSup)
+                url: URL + "supplier/v1/createMaterialSupplier",
+                data: JSON.stringify(sup)
             })
         }
 
         else {
             return $http({
                 method: "PUT",
-                url: URL + "category/v1/updateMaterialSupplier",
-                data: JSON.stringify(matSup)
+                url: URL + "supplier/v1/updateMaterialSupplier",
+                data: JSON.stringify(sup)
             })
         }
     }
 
-    this.getallCat = function (pageIndex, pageSize) {
+    this.getallSupplier = function (pageIndex, pageSize) {
         return $http({
             method: 'GET',
-            url: URL + "category/v1/getAllSuppliersByPagination/{pageNumber}/{pageSize}?pageNumber=" + pageIndex + "&pageSize=" + pageSize
+            url: URL + "supplier/v1/getAllSuppliersByPagination/{pageNumber}/{pageSize}?pageNumber=" + pageIndex + "&pageSize=" + pageSize
         });
     }
 
-    this.deletematSup = function (matSup) {
+    this.deleteSupplier = function (sup) {
         return $http({
             method: "DELETE",
-            url: URL + "category/v1/deleteSupplierById/" + matSup.supplierId
+            url: URL + "supplier/v1/deleteSupplierBySupplierId/" + sup.supplierId
         })
     }                               
 
