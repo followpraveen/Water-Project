@@ -22,7 +22,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
 
 
     $scope.pageSize = 2;
-    $scope.pageIndex = 1;
+    $scope.pageIndex = 0;
     $scope.maxSize = "";
     $scope.totalItems = "";
     $scope.numPages = "";
@@ -41,7 +41,7 @@ myApp.controller('productCtrl', ['$scope', 'productService', function ($scope, p
                     discount:value.discount, gst:value.gst, specification: value.specification,
                     createdDate: value.insertedDate, updatedDate: value.updatedDate, createdBy: value.createdBy.userName,
                     updatedBy: value.updatedBy.userName
-                });
+                }); console.log(masPro);
                 $scope.totalItems = response.data.totalElements;
                 $scope.numPages = response.data.totalPages;
             });
